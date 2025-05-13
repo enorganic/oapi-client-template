@@ -71,14 +71,19 @@ dependencies = [
 
 [tool.ruff]
 line-length = 79
+# include = [
+#     "hooks",
+#     "*/scripts/remodel.py"
+# ]
 extend-exclude = [
-    "{{cookiecutter.project_name}}",
+    "*/tests",
 ]
 
 [tool.ruff.lint]
 ignore = [
     "F842",
     "INP001",
+    "ARG001",
 ]
 extend-select = [
     "E",

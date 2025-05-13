@@ -1,6 +1,5 @@
-#!/usr/bin/env python3
 import re
-from typing import Pattern
+from re import Pattern
 
 PROJECT_NAME_REGEX: str = r"^[a-z][a-z0-9\-]*[a-z0-9]$"
 PROJECT_NAME_PATTERN: Pattern = re.compile(PROJECT_NAME_REGEX)
@@ -9,19 +8,23 @@ PACKAGE_NAME_PATTERN: Pattern = re.compile(PACKAGE_NAME_REGEX)
 PROJECT_NAME: str = "{{cookiecutter.project_name}}"
 PACKAGE_NAME: str = "{{cookiecutter.package}}"
 
+
 def main() -> None:
+    message: str
     if not PROJECT_NAME_PATTERN.match(PROJECT_NAME):
-        raise ValueError(
-            f"{repr(PROJECT_NAME)} is not a valid project name. "
+        message = (
+            f"{PROJECT_NAME!r} is not a valid project name. "
             "Project names must match the following regular expression: "
-            f"{repr(PROJECT_NAME_REGEX)}"
+            f"{PROJECT_NAME_REGEX!r}"
         )
+        raise ValueError(message)
     if not PACKAGE_NAME_PATTERN.match(PACKAGE_NAME):
-        raise ValueError(
-            f"{repr(PACKAGE_NAME)} is not a valid package name. "
+        message = (
+            f"{PACKAGE_NAME!r} is not a valid package name. "
             "Package names must match the following regular expression: "
-            f"{repr(PACKAGE_NAME_REGEX)}"
+            f"{PACKAGE_NAME_REGEX!r}"
         )
+        raise ValueError(message)
 
 
 if __name__ == "__main__":

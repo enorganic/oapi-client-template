@@ -102,5 +102,5 @@ clean:
 # Download an updated Open API document and re-generate the client and model
 remodel:
 	{ hatch --version || pipx install --upgrade hatch || python3 -m pip install --upgrade hatch ; } && \
-	hatch run scripts/remodel.py && \
+	hatch run python scripts/remodel.py && \
     echo "Remodel Complete"

@@ -1,12 +1,8 @@
-#!/usr/bin/env python3
-from subprocess import CalledProcessError, check_call
-from contextlib import suppress
+from subprocess import check_call
 
 
 def main() -> None:
     check_call(("make",))
-    with suppress(CalledProcessError):
-        check_call(("make", "remodel"))
 
 
 if __name__ == "__main__":

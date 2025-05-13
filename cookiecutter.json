@@ -8,11 +8,15 @@
     "repository_url": "",
     "documentation_url": "",
     "openapi_document_url": "",
+    "openapi_repository_url": "",
+    "openapi_repository_document_path": "",
     "__prompts__": {
         "project_name": "The name of your project (example: enterprise-name-application-client)",
         "package": "The module path of your base package, including namespacing, if applicable (example: enterprise_name.application_client)",
         "package_directory": "The relative file path to your base package (example: src/enterprise_name/application_client)",
-        "openapi_document_url": "The URL from which an OpenAPI document for this client can be obtained (example: https://raw.githubusercontent.com/cloudflare/api-schemas/refs/heads/main/openapi.json)"
+        "openapi_document_url": "The URL from which an OpenAPI document for this client can be obtained (example: https://raw.githubusercontent.com/cloudflare/api-schemas/refs/heads/main/openapi.json)",
+        "openapi_git_repository_url": "The URL of the Git repository containing the Open API document (example: https://github.com/cloudflare/api-schemas.git)",
+        "openapi_git_repository_document_path": "The relative path to the OpenAPI document in the repository (example: openapi.json)"
     },
     "_repository_url": "https://{{import re; re.sub(cookiecutter.repository_url.partition('://')[2], r'.git$', '', re.IGNORECASE)}}",
     "_documentation_url": "{{from urllib.parse import urlparse; cookiecutter.repository_url or ('https://{}.github.io/{}'.format(*urlparse(cookiecutter._repository_url).path.split('/')[1:3] if 'github.com' in cookiecutter.repository_url else '')}}"
