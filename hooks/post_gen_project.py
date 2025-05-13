@@ -8,6 +8,7 @@ def main() -> None:
     with open("scripts/remodel.py", "w") as file:
         file.write(data.replace("  # --\n", "\n"))
     check_call(("make",))
+    check_call(("hatch", "fmt", "--formatter"))
 
 
 if __name__ == "__main__":
