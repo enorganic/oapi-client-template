@@ -1,0 +1,118 @@
+[project]
+name = "oapi-client-template"
+version = "0.0.0"
+description = "A template for OpenAPI clients leveraging the `oapi` library"
+readme = "README.md"
+license = "MIT"
+requires-python = "~=3.9"
+authors = [
+    { email = "david@belais.me" },
+]
+keywords = [
+    "OpenAPI",
+]
+
+[project.urls]
+Documentation = "https://oapi-client-template.enorganic.org"
+Repository = "https://github.com/enorganic/oapi-client-template"
+
+[tool.hatch.envs.default]
+python = "3.9"
+dependencies = [
+    "dependence~=1.0",
+    "cookiecutter~=2.6",
+    "gittable~=0.0",
+    "pyyaml>2",
+    "mypy",
+    "oapi~=2.0",
+    "pytest",
+]
+pre-install-commands = [
+    "pip install --upgrade pip setuptools",
+]
+post-install-commands = [
+    "hatch run mypy --install-types --non-interactive || echo",
+]
+
+[tool.hatch.envs.hatch-test]
+extra-dependencies = [
+    "dependence~=1.0",
+    "pyyaml>2",
+]
+extra-args = [
+    "-s",
+    "-vv",
+    "--doctest-modules",
+]
+
+[[tool.hatch.envs.hatch-test.matrix]]
+python = [
+    "3.9",
+    "3.10",
+    "3.11",
+    "3.12",
+    "3.13",
+]
+
+[tool.hatch.envs.hatch-static-analysis]
+extra-dependencies = [
+    "dependence~=1.0",
+]
+
+[tool.hatch.envs.docs]
+template = "docs"
+python = "3.13"
+dependencies = [
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "black",
+    "dependence~=1.0",
+]
+
+[tool.ruff]
+line-length = 79
+extend-exclude = [
+    "{{cookiecutter.project_name}}",
+]
+
+[tool.ruff.lint]
+ignore = [
+    "F842",
+    "INP001",
+]
+extend-select = [
+    "E",
+    "F",
+    "UP",
+    "B",
+    "SIM",
+    "I",
+    "C",
+    "N",
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 79
+
+[tool.black]
+line-length = 79
+target-version = [
+    "py39",
+    "py310",
+    "py311",
+    "py312",
+    "py313",
+]
+
+[tool.mypy]
+python_version = "3.9"
+files = [
+    "hooks",
+]
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+

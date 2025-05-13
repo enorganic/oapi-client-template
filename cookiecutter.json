@@ -1,0 +1,19 @@
+{
+    "project_name": "",
+    "package":
+    "{{cookiecutter.project_name.replace('-', '_')}}",
+    "package_directory":
+    "src/{{cookiecutter.package.replace('.', '/')}}",
+    "author_email": "",
+    "repository_url": "",
+    "documentation_url": "",
+    "openapi_document_url": "",
+    "__prompts__": {
+        "project_name": "The name of your project (example: enterprise-name-application-client)",
+        "package": "The module path of your base package, including namespacing, if applicable (example: enterprise_name.application_client)",
+        "package_directory": "The relative file path to your base package (example: src/enterprise_name/application_client)",
+        "openapi_document_url": "The URL from which an OpenAPI document for this client can be obtained (example: https://raw.githubusercontent.com/cloudflare/api-schemas/refs/heads/main/openapi.json)"
+    },
+    "_repository_url": "https://{{import re; re.sub(cookiecutter.repository_url.partition('://')[2], r'.git$', '', re.IGNORECASE)}}",
+    "_documentation_url": "{{from urllib.parse import urlparse; cookiecutter.repository_url or ('https://{}.github.io/{}'.format(*urlparse(cookiecutter._repository_url).path.split('/')[1:3] if 'github.com' in cookiecutter.repository_url else '')}}"
+}

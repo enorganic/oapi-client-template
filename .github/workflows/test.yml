@@ -1,0 +1,16 @@
+name: test
+on:
+  workflow_dispatch:
+  workflow_call:
+  pull_request:
+  push:
+    branches:
+    - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install Hatch
+      uses: pypa/hatch@install
+    - name: Test with coverage
+      run: hatch test
