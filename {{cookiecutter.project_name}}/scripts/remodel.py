@@ -13,9 +13,13 @@ import oapi
 import yaml  # type: ignore
 from sob.model import serialize
 
-OPENAPI_DOCUMENT_URL: str = "{{cookiecutter.openapi_document_url}}"
-OPENAPI_GIT_REPOSITORY_URL: str = "{{cookiecutter.openapi_git_repository_url}}"
-OPENAPI_GIT_REPOSITORY_DOCUMENT_PATH: str = (
+OPENAPI_DOCUMENT_URL: str = (  # --
+    "{{cookiecutter.openapi_document_url}}"
+)
+OPENAPI_GIT_REPOSITORY_URL: str = (  # --
+    "{{cookiecutter.openapi_git_repository_url}}"
+)
+OPENAPI_GIT_REPOSITORY_DOCUMENT_PATH: str = (  # --
     "{{cookiecutter.openapi_git_repository_document_path}}"
 )
 
@@ -23,8 +27,10 @@ PROJECT_PATH: Path = Path(__file__).absolute().parent.parent
 OPENAPI_PATH: Path = PROJECT_PATH / "openapi"
 OPENAPI_ORIGINAL: Path = OPENAPI_PATH / "original.yaml"
 OPENAPI_FIXED: Path = OPENAPI_PATH / "fixed.json"
-MODEL_PY: Path = (
-    PROJECT_PATH / "{{cookiecutter.package_directory}}" / "model.py"
+MODEL_PY: Path = (  # --
+    PROJECT_PATH  # --
+    / "{{cookiecutter.package_directory}}"  # --
+    / "model.py"
 )
 CLIENT_PY: Path = (
     PROJECT_PATH / "{{cookiecutter.package_directory}}" / "client.py"
