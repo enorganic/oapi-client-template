@@ -1,3 +1,4 @@
+from contextlib import suppress
 from subprocess import check_call
 
 
@@ -9,6 +10,8 @@ def main() -> None:
         file.write(data.replace("  # --\n", "\n"))
     check_call(("make",))
     check_call(("hatch", "fmt", "--formatter"))
+    with suppress(Exception):
+        check_call(("make", "remodel"))
 
 
 if __name__ == "__main__":

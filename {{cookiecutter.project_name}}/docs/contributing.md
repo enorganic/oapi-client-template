@@ -14,7 +14,7 @@ installed prior to performing the following steps.
     ```bash
     cd ~/Code && \
     git clone\
-    {{cookiecutter._repository_url}}}.git {{cookiecutter.project_name}} && \
+    {{cookiecutter.repository_url}}}.git {{cookiecutter.project_name}} && \
     cd {{cookiecutter.project_name}} && \
     make
     ```

@@ -1,6 +1,6 @@
 # {{cookiecutter.project_name}}
 
-[![test]({{cookiecutter._repository_url}}/actions/workflows/test.yml/badge.svg?branch=main)]({{cookiecutter._repository_url}}/actions/workflows/test.yml)
+[![test]({{cookiecutter.repository_url}}/actions/workflows/test.yml/badge.svg?branch=main)]({{cookiecutter.repository_url}}/actions/workflows/test.yml)
 [![PyPI version](https://badge.fury.io/py/{{cookiecutter.project_name}}.svg?icon=si%3Apython)](https://badge.fury.io/py/{{cookiecutter.project_name}})
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor

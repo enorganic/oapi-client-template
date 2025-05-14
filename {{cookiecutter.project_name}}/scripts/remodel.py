@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 from collections.abc import Sequence
+from io import StringIO
 from pathlib import Path
 from tempfile import gettempdir
 from typing import IO, Any, cast
@@ -39,6 +40,20 @@ STRING_SCHEMA: oapi.oas.Schema = oapi.oas.Schema(type_="string")
 BOOLEAN_SCHEMA: oapi.oas.Schema = oapi.oas.Schema(type_="boolean")
 
 
+def fix_openapi_data(data: str) -> str:
+    """
+    Fix errors in an Open API document which prevent the document from being
+    parsed.
+
+    This is an atypical issue, so this function can remain
+    empty or be removed for most clients.
+
+    Returns:
+        Parseable JSON/YAML data.
+    """
+    return data
+
+
 def get_openapi(
     openapi_document_path: str | Path = OPENAPI_ORIGINAL,
 ) -> oapi.oas.OpenAPI:
@@ -50,37 +65,18 @@ def get_openapi(
         if isinstance(openapi_document_path, Path)
         else openapi_document_path.lower()
     )
-    schema_io: IO[str]
-    schema: dict[str, Any]
-    with open(openapi_document_path) as schema_io:
-        if schema_path_lowercase.endswith((".yaml", ".yml")):
-            schema = yaml.safe_load(schema_io)
-        else:
-            schema = json.load(schema_io)
-    return oapi.oas.OpenAPI(schema)
-
-
-def fix_openapi_json(
-    path: Path | str = OPENAPI_FIXED,
-) -> None:
-    """
-    Fix errors in an Open API document which prevent the document from being
-    parsed as an OpenAPI document.
-
-    This is an atypical issue, so this function can remain
-    empty or be removed for most clients.
-
-    Example:
-
-        json_text: str
-        with open(path, "r") as file:
-            json_text = file.read()
-        # ...perform any string manipulations needed here
-        json_data: dict[str, Any] = json.loads(json_text)
-        # ...modify the json_data as needed here
-        with open(path, "w") as file:
-            file.write(json.dumps(json_data, indent=4))
-    """
+    openapi_document_io: IO[str]
+    openapi_document_json: str
+    openapi_document_dict: dict[str, Any]
+    with open(openapi_document_path) as openapi_document_io:
+        openapi_document_json = openapi_document_io.read()
+    openapi_document_json = fix_openapi_data(openapi_document_json)
+    openapi_document_io = StringIO(openapi_document_json)
+    if schema_path_lowercase.endswith((".yaml", ".yml")):
+        openapi_document_dict = yaml.safe_load(openapi_document_io)
+    else:
+        openapi_document_dict = json.load(openapi_document_io)
+    return oapi.oas.OpenAPI(openapi_document_dict)
 
 
 def fix_openapi(
@@ -131,9 +127,6 @@ def update_openapi_original() -> Path | None:
                 repo=OPENAPI_GIT_REPOSITORY_URL,
                 files=(OPENAPI_GIT_REPOSITORY_DOCUMENT_PATH,),
                 directory=gettempdir(),
-                # branch="",
-                # user="",
-                # password="",
             )[0],
             OPENAPI_ORIGINAL,
         )
@@ -147,9 +140,8 @@ def update_model() -> Path | None:
     document.
     """
     update_openapi_original()
-    if OPENAPI_ORIGINAL.exists():
+    if not OPENAPI_ORIGINAL.exists():
         raise FileNotFoundError(str(OPENAPI_ORIGINAL))
-    fix_openapi_json(OPENAPI_ORIGINAL)  # If needed
     open_api: oapi.oas.OpenAPI = get_openapi(OPENAPI_ORIGINAL)
     fix_openapi(open_api)  # If needed
     fixed_io: IO[str]

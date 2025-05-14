@@ -1,9 +1,9 @@
 # {{cookiecutter.project_name}}
 
-[![test]({{cookiecutter._repository_url}}/actions/workflows/test.yml/badge.svg?branch=main)]({{cookiecutter._repository_url}}/actions/workflows/test.yml)
+[![test]({{cookiecutter.repository_url}}/actions/workflows/test.yml/badge.svg?branch=main)]({{cookiecutter.repository_url}}/actions/workflows/test.yml)
 [![PyPI version](https://badge.fury.io/py/{{cookiecutter.project_name}}.svg?icon=si%3Apython)](https://badge.fury.io/py/{{cookiecutter.project_name}})
 
-Please refer to the [documentation]({{cookiecutter._documentation_url}}) for
+Please refer to the [documentation]({{cookiecutter.documentation_url}}) for
 detailed usage information.
 
 ## Install

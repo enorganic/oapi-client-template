@@ -19,8 +19,8 @@ dependencies = [
 ]
 
 [project.urls]
-Documentation = "{{cookiecutter._documentation_url}}"
-Repository = "{{cookiecutter._repository_url}}"
+Documentation = "{{cookiecutter.documentation_url}}"
+Repository = "{{cookiecutter.repository_url}}"
 
 [tool.hatch.build.targets.sdist]
 packages = [
