@@ -127,17 +127,20 @@ target-version = [
 [tool.mypy]
 python_version = "3.9"
 files = [
-    "{{cookiecutter.package_directory}}",
+    "src",
     "tests",
     "scripts",
 ]
+mypy_path = "src"
 disallow_untyped_defs = true
 disallow_incomplete_defs = true
+namespace_packages = true
+explicit_package_bases = true
 
 [tool.coverage.report]
 fail_under = 80
 
 [tool.coverage.run]
 source = [
-    "{{cookiecutter.package_directory}}",
+    "src",
 ]
