@@ -19,39 +19,64 @@ To create a repository based on this template:
 
     ```console
     $ cookiecutter "https://github.com/enorganic/oapi-client-template.git"
-
-    ...
+    You've downloaded /Users/nonsense/.cookiecutters/oapi-client-template before. Is it okay to delete and re-download it? [y/n] (y): y
+    [1/9]  project_name - The name of your project (example: enterprise-name-application-client) (): oapi-test-client
+    [2/9] package - The module path of your base package, including namespacing, if applicable (example: enterprise_name.application_client) (oapi_test_client): 
+    [3/9] package_directory - The relative file path to your base package (example: src/enterprise_name/application_client) (src/oapi_test_client): 
+    [4/9] author_email (): info@nonsense.org
+    [5/9] repository_url (): https://github.com/your-organization/oapi-test-client
+    [6/9] documentation_url (): https://your-organization.github.io/oapi-test-client
+    [7/9] openapi_document_url - The URL from which an OpenAPI document for this client can be obtained (example: https://raw.githubusercontent.com/cloudflare/api-schemas/refs/heads/main/openapi.json) (): https://raw.githubusercontent.com/cloudflare/api-schemas/refs/heads/main/openapi.json
+    [8/9] openapi_git_repository_url - The URL of the Git repository containing the Open API document (example: https://github.com/cloudflare/api-schemas.git) (): 
+    [9/9] openapi_git_repository_document_path - The relative path to the OpenAPI document in the repository (example: openapi.json) ():
     ```
 
     The resulting directory/file structure created by the above example input
     looks as follows:
 
     ```console
-    $ tree -a -I 'venv|.git|.mypy_cache|*.egg-info' oapi-test-client
-    oapi-client-test-project
+    $ tree -a -I '.git|.mypy_cache|.ruff_cache' oapi-test-client 
+    oapi-test-client
     ├── .editorconfig
     ├── .github
     │   └── workflows
     │       ├── distribute.yml
     │       └── test.yml
     ├── .gitignore
+    ├── docs
+    │   ├── api
+    │   │   ├── oapi_test_client.client.md
+    │   │   └── oapi_test_client.model.md
+    │   ├── assets
+    │   │   ├── javascripts
+    │   │   │   └── extra.js
+    │   │   └── stylesheets
+    │   │       └── style.css
+    │   ├── CNAME
+    │   ├── contributing.md
+    │   └── index.md
     ├── Makefile
-    ├── README.md
-    ├── oapi-client-test-project
-    │   ├── __init__.py
-    │   ├── client.py
-    │   ├── model.py
-    │   └── py.typed
+    ├── mkdocs.yaml
+    ├── openapi
+    │   ├── fixed.json
+    │   └── original.yaml
     ├── pyproject.toml
+    ├── README.md
+    ├── scripts
+    │   └── remodel.py
+    ├── src
+    │   └── oapi_test_client
+    │       ├── client.py
+    │       └── model.py
     └── tests
-       ├── conftest.py
-       └── test_integration.py
+        ├── conftest.py
+        └── test_integration.py
     ```
 
 -   Once you've created your new project, you will want to start by
     editing `scripts/remodel.py` (read the inline comments for instruction).
     Once you've edited this as needed, run
-    `cd oapi-client-test-project && make remodel` to generate
+    `cd oapi-test-client && make remodel` to generate
     your model and client modules.
 
 -   Edit `tests/conftest.py` such that `get_client` returns a client
@@ -80,5 +105,5 @@ To create a repository based on this template:
     git add . && \
     git stage . && \
     git commit -m "First Commit" && \
-    git remote add origin "https://github.com/your-organization/oapi-client-test-project.git"
+    git remote add origin "https://github.com/your-organization/oapi-test-client.git"
     ```
