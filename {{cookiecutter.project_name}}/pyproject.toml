@@ -27,7 +27,7 @@ packages = [
     "{{cookiecutter.package_directory}}",
 ]
 sources = [
-    "{{cookiecutter.package_directory.rpartition('/')[0]}}",
+    "src",
 ]
 
 [tool.hatch.build.targets.wheel]
