@@ -34,26 +34,6 @@ post-install-commands = [
     "hatch run mypy --install-types --non-interactive || echo",
 ]
 
-[tool.hatch.envs.hatch-test]
-extra-dependencies = [
-    "dependence~=1.0",
-    "pyyaml>2",
-]
-extra-args = [
-    "-s",
-    "-vv",
-    "--doctest-modules",
-]
-
-[[tool.hatch.envs.hatch-test.matrix]]
-python = [
-    "3.9",
-    "3.10",
-    "3.11",
-    "3.12",
-    "3.13",
-]
-
 [tool.hatch.envs.hatch-static-analysis]
 extra-dependencies = [
     "dependence~=1.0",
@@ -71,10 +51,6 @@ dependencies = [
 
 [tool.ruff]
 line-length = 79
-# include = [
-#     "hooks",
-#     "*/scripts/remodel.py"
-# ]
 extend-exclude = [
     "*/tests",
 ]

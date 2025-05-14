@@ -27,7 +27,7 @@ To create a repository based on this template:
     looks as follows:
 
     ```console
-    $ tree -a -I 'venv|.git|.mypy_cache|*.egg-info' oapi-client-test-project
+    $ tree -a -I 'venv|.git|.mypy_cache|*.egg-info' oapi-test-client
     oapi-client-test-project
     ├── .editorconfig
     ├── .github

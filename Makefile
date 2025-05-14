@@ -8,7 +8,6 @@ install:
 	hatch env create default && \
 	hatch env create docs && \
 	hatch env create hatch-static-analysis && \
-	hatch env create hatch-test && \
 	echo "Installation complete"
 
 # Re-create all environments, from scratch (no reference to pinned
@@ -46,21 +45,6 @@ upgrade:
 	 pyproject.toml > .requirements.txt && \
 	hatch run hatch-static-analysis:pip install --upgrade --upgrade-strategy eager\
 	 -r .requirements.txt && \
-	hatch run hatch-test.py$(MINIMUM_PYTHON_VERSION):dependence freeze\
-	 --include-pointer /tool/hatch/envs/hatch-test\
-	 --include-pointer /project\
-	 -nv '*'\
-	 pyproject.toml > .requirements.txt && \
-	hatch run hatch-test.py$(MINIMUM_PYTHON_VERSION):pip install --upgrade --upgrade-strategy eager\
-	 -r .requirements.txt && \
-	hatch run hatch-test.py3.10:pip install --upgrade --upgrade-strategy eager\
-	 -r .requirements.txt && \
-	hatch run hatch-test.py3.11:pip install --upgrade --upgrade-strategy eager\
-	 -r .requirements.txt && \
-	hatch run hatch-test.py3.12:pip install --upgrade --upgrade-strategy eager\
-	 -r .requirements.txt && \
-	hatch run hatch-test.py3.13:pip install --upgrade --upgrade-strategy eager\
-	 -r .requirements.txt && \
 	rm .requirements.txt && \
 	make requirements
 
@@ -73,14 +57,13 @@ requirements:
 	 --include-pointer /project\
 	 pyproject.toml && \
 	hatch run docs:dependence update pyproject.toml --include-pointer /tool/hatch/envs/docs && \
-	hatch run hatch-test.py$(MINIMUM_PYTHON_VERSION):dependence update pyproject.toml --include-pointer /tool/hatch/envs/hatch-test && \
 	hatch run hatch-static-analysis:dependence update pyproject.toml --include-pointer /tool/hatch/envs/hatch-static-analysis && \
 	echo "Requirements Updated"
 
 # Test & check linting/formatting (for local use only)
 test:
 	{ hatch --version || pipx install --upgrade hatch || python3 -m pip install --upgrade hatch ; } && \
-	hatch fmt --check && hatch run mypy && hatch test -c -vv && \
+	hatch fmt --check && hatch run mypy && \
 	echo "Tests Successful"
 
 # Apply formatting rules and perform static analysis and type checking
