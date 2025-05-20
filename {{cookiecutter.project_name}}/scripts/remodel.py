@@ -193,6 +193,7 @@ def update_client() -> None:
             "oauth2_password",
             "oauth2_authorization_url",
             "oauth2_token_url",
+            "oauth2_scope",
             "oauth2_refresh_url",
             "oauth2_flows",
             "open_id_connect_url",
